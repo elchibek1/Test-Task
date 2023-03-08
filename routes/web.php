@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostsController::class, 'index']);
-Route::resource('posts', PostsController::class);
-
+Route::resource('posts', PostsController::class)->except(['index', 'show'])->middleware('auth');
+Route::get('/', [PostsController::class, 'index'])->name('posts.index');
+Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
+Route::resource('posts.comments', PostCommentsController::class)->only(['store', 'destroy'])->middleware('auth');
 Auth::routes();
 

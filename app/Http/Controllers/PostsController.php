@@ -59,7 +59,9 @@ class PostsController extends Controller
      */
     public function show(Post $post): View|Factory|Application
     {
+
         $comments = Comment::where('post_id', $post->id)->get();
+        $post->setRelation('comments', $post->comments()->paginate(6));
         return view('posts.show', compact('post','comments'));
     }
 
