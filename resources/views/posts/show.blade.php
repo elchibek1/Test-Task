@@ -5,6 +5,10 @@
             <img src="{{asset('storage/' . $post->picture)}}"
                  style="max-width: 700px; max-height: 500px">
             <div class="description px-5 pb-3 mt-3">
+                <div class="descriptions mt-2">
+                    <h3 class="title">{{$post->title}}</h3>
+                    <h5 class="body">{{$post->text}}</h5>
+                </div>
                 <div class="actions" style="display: flex">
                     @can('update-post', $post)
                         <a href="{{route('posts.edit', ['post' => $post])}}">
@@ -20,9 +24,6 @@
                         </form>
                     @endcan
                 </div>
-
-                <h3 class="title">{{$post->title}}</h3>
-                <h5 class="body">{{$post->text}}</h5>
             </div>
         </div>
     </div>
@@ -80,8 +81,8 @@
             </div>
         </div>
 
-        <div class="row row-cols-sm-1 row-cols-md-3">
-            <div class="col-1 mt-3 pt-3">
+        <div class="row  row-cols-md-3">
+            <div class=" mt-3 pt-3">
                 @foreach($post->comments as $comment)
                     <div class="media g-mb-30 media-comment" style="display: flex">
                         <img src="{{asset('storage/' . $comment->picture)}}"
