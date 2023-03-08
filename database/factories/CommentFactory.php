@@ -22,7 +22,7 @@ class CommentFactory extends Factory
             'text' => $this->faker->paragraph(),
             'picture' => $this->getImage(rand(1,3)),
             'user_id' => rand(1,3),
-            'post_id' => rand(1,5)
+            'post_id' => rand(1,10)
         ];
     }
 

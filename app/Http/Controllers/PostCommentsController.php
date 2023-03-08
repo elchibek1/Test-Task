@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class PostCommentsController extends Controller
 {
-    public function store(CommentRequest $request)
+    public function store(CommentRequest $request): RedirectResponse
     {
         $data = $request->validated();
         if($request->hasFile('picture'))
@@ -20,7 +21,7 @@ class PostCommentsController extends Controller
         return back()->with('message', 'Comment successfully created');
     }
 
-    public function update(Comment $comment, CommentRequest $request)
+    public function update(Comment $comment, CommentRequest $request): RedirectResponse
     {
         $this->authorize('update-comment',  $comment);
         $data = $request->validated();
