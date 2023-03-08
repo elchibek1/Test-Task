@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('posts', PostsController::class)->except(['index', 'show'])->middleware('auth');
 Route::get('/', [PostsController::class, 'index'])->name('posts.index');
+Route::get('/posts', [PostsController::class, 'index']);
 Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
-Route::resource('posts.comments', PostCommentsController::class)->only(['store', 'destroy'])->middleware('auth');
+Route::resource('posts.comments', PostCommentsController::class)->only(['store', 'destroy', 'update'])->middleware('auth');
 Auth::routes();
 

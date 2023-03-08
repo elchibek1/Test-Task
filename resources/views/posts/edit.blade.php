@@ -7,7 +7,15 @@
             @csrf
             <div class="form-group">
                 <label>Наименование поста</label>
-                <input type="text" class="form-control" name="text" value="{{$post->text}}">
+                <input type="text" class="form-control" name="title" value="{{$post->title}}">
+                @error('text')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea name="text" class="form-control" id="commentFormControl" rows="3"
+                          required>{{$post->text}}</textarea>
                 @error('text')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

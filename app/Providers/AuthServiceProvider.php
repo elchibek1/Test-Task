@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('delete-post', function ($user, $post){
+            return $user->id == $post->user_id;
+        });
+        Gate::define('update-post', function ($user, $post){
+            return $user->id == $post->user_id;
+        });
+        Gate::define('update-comment', function ($user, $comment)
+        {
+            return $user->id == $comment->user_id;
+        });
+        Gate::define('delete-comment', function ($user, $comment)
+        {
+            return $user->id == $comment->user_id;
+        });
     }
 }

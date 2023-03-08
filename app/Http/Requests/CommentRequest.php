@@ -25,7 +25,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'text' => ['required', 'min:10','max:500', "not_regex:([?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">]])"],
-            'picture' => ['image', 'required']
+            'picture' => ['image']
         ];
     }
 }

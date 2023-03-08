@@ -85,6 +85,7 @@ class PostsController extends Controller
      */
     public function update(PostRequest $request, Post $post): RedirectResponse
     {
+        $this->authorize('update-post', $post);
         $data = $request->validated();
         if($request->hasFile('picture'))
         {
@@ -104,6 +105,7 @@ class PostsController extends Controller
      */
     public function destroy(Post $post): RedirectResponse
     {
+        $this->authorize('delete-post', $post);
         $post->delete();
         return redirect()->route('posts.index')->with('message', "Post successfully deleted");
     }
